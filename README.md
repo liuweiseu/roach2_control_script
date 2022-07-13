@@ -14,7 +14,7 @@ If you can't create python2.7 env, try the following commands:
 ```
 	conda install pyqt
 ```
-2. You need to install some necessary packages:
+3. You need to install some necessary packages:
 ```
 	pip install katcp==0.5.5
 	pip install termcolors
