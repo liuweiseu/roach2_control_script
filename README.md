@@ -1,5 +1,5 @@
-# To use the GUI software, you need python2 and pyqt installed.
-
+# ROACH2 Control Scripts
+To use the GUI software, you need python2 and pyqt installed.
 * install python2
 1. I suggest you intall conda first, and the create a python2 env:
 ```
