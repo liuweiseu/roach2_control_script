@@ -10,12 +10,16 @@ If you can't create python2.7 env, try the following commands:
 ```
 	conda create -c free -n fast_roach2_py2 python==2.7.9
 ```
-2. You need to install some necessary packages:
-```
-	pip install katcp==0.5.5
-```
-3. install pyqt
+2. install pyqt
 ```
 	conda install pyqt
 ```
+2. You need to install some necessary packages:
+```
+	pip install katcp==0.5.5
+	pip install termcolors
+	pip install numpy
+	pip install pyqtgraph
+```
+
 
