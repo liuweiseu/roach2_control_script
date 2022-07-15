@@ -81,7 +81,8 @@ def split_snapshot(snap):
 
 def plot_anim():
 	global fpga, plts, lines
-	for u in range(0, 2):
+	#for u in range(0, 2):
+        for u in (0,0):
 		unit = 'u%d' % u
 
 		# ADC histogram
@@ -143,7 +144,7 @@ if __name__ == '__main__':
 			print('Programming FPGA with  %s ... ' % bitstream),
 			fpga.progdev(bitstream)
 			print('done')
-			for zdok in (0, 1):
+			for zdok in (0,0):
 				katadc.chip_init(fpga, zdok)
 				for inp in ('I', 'Q'):
 					katadc.rf_fe_set(fpga, zdok, inp, rf_gain)
@@ -152,7 +153,7 @@ if __name__ == '__main__':
 					rf = katadc.rf_fe_get(fpga, zdok, inp)
 					print(rf)
 
-		for unit in ('u0', 'u1'):
+		for unit in ('u0','u0'):
 			print('Configuring spectrometer "%s" fft_shift, fft_shift=0x%X ... ' % (unit, opts.fftshift)),
 			fpga.write_int(unit + '_fft_shift', int(opts.fftshift))
 			print('done')
@@ -177,10 +178,10 @@ if __name__ == '__main__':
 		init_10gbe('xgbe2', '192.168.16.223', 33333, '239.2.3.3', 12345)
 		init_10gbe('xgbe3', '192.168.16.224', 33333, '239.2.3.4', 12345)
 
-		init_10gbe('xgbe4', '192.168.16.231', 33333, '239.2.4.1', 12345)
-		init_10gbe('xgbe5', '192.168.16.232', 33334, '239.2.4.2', 12345)
-		init_10gbe('xgbe6', '192.168.16.233', 33335, '239.2.4.3', 12345)
-		init_10gbe('xgbe7', '192.168.16.234', 33336, '239.2.4.4', 12345)
+		#init_10gbe('xgbe4', '192.168.16.231', 33333, '239.2.4.1', 12345)
+		#init_10gbe('xgbe5', '192.168.16.232', 33334, '239.2.4.2', 12345)
+		#init_10gbe('xgbe6', '192.168.16.233', 33335, '239.2.4.3', 12345)
+		#init_10gbe('xgbe7', '192.168.16.234', 33336, '239.2.4.4', 12345)
 
 		print('Issue reset signal...'),
 		fpga.write_int('reset', 0b00)

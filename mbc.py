@@ -33,7 +33,7 @@ SCOPE_IDLE_FLAG = 0x12345678
 POLLING_INTERVAL = 1             # Second
 
 roach_list = ['r1745', 'r1746', 'r1747', 'r1748', 'r1749', 'r1750',
-              'r1801', 'r1802', 'r1803', 'r1805', 'r1806', 'r1807']
+              'r1801', 'r1802', 'r1803', 'r1805', 'r1806', 'r1807','10.0.1.168']
 
 # Define main window class from template
 path = os.path.dirname(os.path.abspath(__file__))
