@@ -9,7 +9,7 @@ import numpy as np
 from pyqtgraph.Qt import QtCore, QtGui
 
 
-bitstream = 'mb8k_v1.163.bof'
+bitstream = 'italy_seti1_v1.172.bof'
 
 roach = '10.0.1.168'
 katcp_port = 7147
@@ -144,6 +144,7 @@ if __name__ == '__main__':
 			print('Programming FPGA with  %s ... ' % bitstream),
 			fpga.progdev(bitstream)
 			print('done')
+			'''
 			for zdok in (0,0):
 				katadc.chip_init(fpga, zdok)
 				for inp in ('I', 'Q'):
@@ -152,6 +153,7 @@ if __name__ == '__main__':
 					print('ZDOK%d %s: ' % (zdok, inp)),
 					rf = katadc.rf_fe_get(fpga, zdok, inp)
 					print(rf)
+			'''
 
 		for unit in ('u0','u0'):
 			print('Configuring spectrometer "%s" fft_shift, fft_shift=0x%X ... ' % (unit, opts.fftshift)),

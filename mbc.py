@@ -204,8 +204,10 @@ class MainForm(TemplateBaseClass):
         elif QtCore.Qt.Checked == state:
             if usetvg & (1 << self.unit) == 0:
                 self.write_register('use_tvg', usetvg | (1 << self.unit))
-
+    
     def on_rfgain_change(self, value):
+        pass
+        '''
         widget_name = str(self.sender().objectName())
         log.debug(widget_name + ' %.1f', value)
         index = int(widget_name[-1])
@@ -214,6 +216,7 @@ class MainForm(TemplateBaseClass):
             katadc.rf_fe_set(self.fpga, self.unit, input_names[index], value)
             log.info('set zdok%d-%s rf gain %f dB' % (self.unit, input_names[index], value))
             self.rfgain[index] = value
+        '''
 
     def on_beamid_change(self, index):
         beamid = index + 1
@@ -462,8 +465,9 @@ class MainForm(TemplateBaseClass):
             widgets[i].setText(self.fabric_ip[i])
         # RF gain
         self.rfgain = []
+        '''
         for inp, widget in zip(('I', 'Q'), (self.ui.spn_rfgain0, self.ui.spn_rfgain1)):
-            rfgain = katadc.rf_fe_get(self.fpga, self.unit, inp)
+            # rfgain = katadc.rf_fe_get(self.fpga, self.unit, inp)
             widget.setEnabled(True)
             if rfgain['enabled']:
                 self.rfgain.append(rfgain['gain'])
@@ -471,6 +475,7 @@ class MainForm(TemplateBaseClass):
             else:
                 self.rfgain.append(None)
                 log.warn('katadc %d RF frontend %s not enabled', self.unit, inp)
+        '''
         # TVG
         usetvg = (self.fpga.read_uint('use_tvg') & (1 << self.unit)) != 0
         self.ui.cb_tvg.setChecked(usetvg)
