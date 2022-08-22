@@ -11,8 +11,9 @@ from pyqtgraph.Qt import QtCore, QtGui
 
 bitstream = 'italy_seti1_v1.172.bof'
 
-roach = '10.0.1.168'
+#roach = '10.0.1.168'
 #roach = 'localhost'
+roach = '192.168.100.128'
 katcp_port = 7147
 rf_gain = 0
 
