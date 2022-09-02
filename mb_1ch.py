@@ -11,9 +11,9 @@ from pyqtgraph.Qt import QtCore, QtGui
 
 bitstream = 'italy_seti1_v1.172.bof'
 
-roach = '10.0.1.168'
+#roach = '10.0.1.168'
 #roach = 'localhost'
-#roach = '192.168.100.128'
+roach = '192.168.100.128'
 katcp_port = 7147
 rf_gain = 0
 
@@ -184,8 +184,8 @@ if __name__ == '__main__':
 
 		#init_10gbe('xgbe4', '192.168.16.231', 33333, '239.2.4.1', 12345)
 		#init_10gbe('xgbe5', '192.168.16.232', 33334, '239.2.4.2', 12345)
-		#init_10gbe('xgbe6', '192.168.16.233', 33335, '239.2.4.3', 12345)
-		#init_10gbe('xgbe7', '192.168.16.234', 33336, '239.2.4.4', 12345)
+		#init_10gbe('xgbe6', '192.168.16.233', 33335, '239.2.4.4', 12345)
+		#init_10gbe('xgbe7', '192.168.16.234', 33336, '239.2.4.3', 12345)
 
 		print('Issue reset signal...'),
 		fpga.write_int('reset', 0b00)

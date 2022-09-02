@@ -28,7 +28,7 @@ from mbv import Plotter
 
 GODMODE = True
 
-FPGA_CLOCK = 225e6              # Hz
+FPGA_CLOCK = 250e6              # Hz
 SCOPE_IDLE_FLAG = 0x12345678
 POLLING_INTERVAL = 1             # Second
 
