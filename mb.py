@@ -4,6 +4,7 @@ import time, struct, sys, logging, socket
 import katcp_wrapper, log_handlers
 import katadc
 import argparse
+import sys
 import pyqtgraph as pg
 import numpy as np
 from pyqtgraph.Qt import QtCore, QtGui
@@ -12,15 +13,6 @@ roach2_default = '192.168.100.128'
 bitstream_default = 'italy_seti1_v1.172.bof'
 port_default = 7147
 
-<<<<<<< HEAD
-bitstream = 'italy_seti1_v1.172.bof'
-
-#roach = '10.0.1.168'
-#roach = 'localhost'
-roach = '192.168.100.128'
-katcp_port = 7147
-=======
->>>>>>> 468a53dc7a0bcf95ab72e124e91d79211341d353
 rf_gain = 0
 
 beam_ids = (7, 16)
@@ -135,20 +127,21 @@ if __name__ == '__main__':
 		parser.add_argument("--plot", dest="plot", action="store_true", default=False,help="Plot the adc data from snapshot.")
 		args = parser.parse_args()
 
+		
 		lh = log_handlers.DebugLogHandler()
 		logger = logging.getLogger(args.roach)
 		logger.addHandler(lh)
 		logger.setLevel(10)
 
-		print('Connecting to server %s on port %i... ' % (args.roach, args.port)),
+		print('Connecting to server %s on port %i... \r\n' % (args.roach, args.port))
 		fpga = katcp_wrapper.FpgaClient(args.roach, args.port, timeout=10, logger=logger)
 		time.sleep(0.1)
 
 		if fpga.is_connected():
 			print('ok')
 		else:
-			print('ERROR connecting to server %s on port %i.\n' % (args.roach,args.port))
-			exit_fail()
+			print('ERROR connecting to server %s on port %i.\r\n' % (args.roach,args.port))
+			sys.exit(1)
 
 		print('-' * 20)
 
@@ -179,17 +172,9 @@ if __name__ == '__main__':
 
 		init_10gbe('xgbe0', '192.168.16.221', 33333, '239.2.3.1', 12345)
 		init_10gbe('xgbe1', '192.168.16.222', 33333, '239.2.3.2', 12345)
-		init_10gbe('xgbe2', '192.168.16.223', 33333, '239.1.2.4', 12345)
-		init_10gbe('xgbe3', '192.168.16.224', 33333, '239.1.2.3', 12345)
+		init_10gbe('xgbe2', '192.168.16.223', 33333, '239.1.2.3', 12345)
+		init_10gbe('xgbe3', '192.168.16.224', 33333, '239.1.2.4', 12345)
 
-<<<<<<< HEAD
-		#init_10gbe('xgbe4', '192.168.16.231', 33333, '239.2.4.1', 12345)
-		#init_10gbe('xgbe5', '192.168.16.232', 33334, '239.2.4.2', 12345)
-		#init_10gbe('xgbe6', '192.168.16.233', 33335, '239.2.4.4', 12345)
-		#init_10gbe('xgbe7', '192.168.16.234', 33336, '239.2.4.3', 12345)
-
-=======
->>>>>>> 468a53dc7a0bcf95ab72e124e91d79211341d353
 		print('Issue reset signal...'),
 		fpga.write_int('reset', 0b00)
 		fpga.write_int('reset', 0b11)
@@ -236,8 +221,10 @@ if __name__ == '__main__':
 			print('Plot started.')
 			plot_anim()
 			QtGui.QApplication.instance().exec_()
-
-	except Exception as e:
-		exit_fail(e)
-	finally:
-		exit_clean()
+	
+	except SystemExit:
+		fpga.stop()
+	#except Exception as e:
+	#	exit_fail(e)
+	#finally:
+	#	exit_clean()
