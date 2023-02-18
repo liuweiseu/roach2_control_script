@@ -4,6 +4,7 @@ import time, struct, sys, logging, socket
 import katcp_wrapper, log_handlers
 import katadc
 import argparse
+import sys
 import pyqtgraph as pg
 import numpy as np
 from pyqtgraph.Qt import QtCore, QtGui
@@ -131,15 +132,16 @@ if __name__ == '__main__':
 		logger.addHandler(lh)
 		logger.setLevel(10)
 
-		print('Connecting to server %s on port %i... ' % (args.roach, args.port)),
+		print('Connecting to server %s on port %i... \r\n' % (args.roach, args.port)),
 		fpga = katcp_wrapper.FpgaClient(args.roach, args.port, timeout=10, logger=logger)
 		time.sleep(0.1)
 
 		if fpga.is_connected():
 			print('ok')
 		else:
-			print('ERROR connecting to server %s on port %i.\n' % (args.roach,args.port))
-			exit_fail()
+			print('ERROR connecting to server %s on port %i.\r\n' % (args.roach,args.port))
+			#exit_clean()
+			sys.exit(1)
 
 		print('-' * 20)
 
@@ -219,8 +221,10 @@ if __name__ == '__main__':
 			print('Plot started.')
 			plot_anim()
 			QtGui.QApplication.instance().exec_()
-
-	except Exception as e:
-		exit_fail(e)
-	finally:
-		exit_clean()
+	
+	except SystemExit:
+		print('error')
+	#except Exception as e:
+	#	exit_fail(e)
+	#finally:
+	#	exit_clean()
