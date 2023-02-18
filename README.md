@@ -3,8 +3,8 @@ To use the GUI software, you need python2 and pyqt installed.
 * install python2
 1. I suggest you intall conda first, and the create a python2 env:
 ```
-	conda create -n fast_roach2_py2 python==2.7
-	conda activate fast_roach2_py2
+	conda create -n roach2_py2 python==2.7
+	conda activate roach2_py2
 ```
    If you can't create python2.7 env, try the following commands:
 ```
