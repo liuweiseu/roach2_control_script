@@ -20,6 +20,7 @@ To use the GUI software, you need python2 and pyqt installed.
 	pip install termcolors
 	pip install numpy
 	pip install pyqtgraph
+	pip install argparse
 ```
 
 
