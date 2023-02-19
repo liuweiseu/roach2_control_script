@@ -13,7 +13,13 @@ roach2_default = '192.168.100.128'
 bitstream_default = 'italy_seti1_v1.172.bof'
 port_default = 7147
 
-beam_id = 0
+beam_id = 1
+src_ip_gbe0 = '192.168.16.223'
+src_ip_gbe1 = '192.168.16.224'
+src_port = 33333
+multicast_ip_pol0 = '239.1.0.3'
+multicast_ip_pol1 = '239.1.0.4'
+dst_port = 12345
 
 mac_base = (2<<40) + (2<<32)
 spec_scope_names = ('AA', 'BB', 'CR', 'CI')
@@ -131,7 +137,7 @@ if __name__ == '__main__':
 		logger.addHandler(lh)
 		logger.setLevel(10)
 
-		print('Connecting to server %s on port %i... \r\n' % (args.roach, args.port))
+		print('Connecting to server %s on port %i... ' % (args.roach, args.port))
 		fpga = katcp_wrapper.FpgaClient(args.roach, args.port, timeout=10, logger=logger)
 		time.sleep(0.1)
 
@@ -170,15 +176,16 @@ if __name__ == '__main__':
 
 		fpga.write_int('use_tvg', 0b00)
 
-		init_10gbe('xgbe0', '192.168.16.221', 33333, '239.2.3.1', 12345)
-		init_10gbe('xgbe1', '192.168.16.222', 33333, '239.2.3.2', 12345)
-		init_10gbe('xgbe2', '192.168.16.223', 33333, '239.1.2.3', 12345)
-		init_10gbe('xgbe3', '192.168.16.224', 33333, '239.1.2.4', 12345)
+		init_10gbe('xgbe0', '192.168.16.221', 33333, '239.2.0.1', 12345)
+		init_10gbe('xgbe1', '192.168.16.222', 33333, '239.2.0.2', 12345)
+		init_10gbe('xgbe2', '192.168.16.223', src_port, multicast_ip_pol1, dst_port)
+		init_10gbe('xgbe3', '192.168.16.224', src_port, multicast_ip_pol0, dst_port)
 
-		print('Issue reset signal...'),
+		print('Issue reset signal...')
 		fpga.write_int('reset', 0b00)
 		fpga.write_int('reset', 0b11)
 		print('done')
+		fpga.stop()
 
 		# set up the figure with a subplot to be plotted
 		if(args.plot):
@@ -224,6 +231,7 @@ if __name__ == '__main__':
 	
 	except SystemExit:
 		fpga.stop()
+		exit()
 	#except Exception as e:
 	#	exit_fail(e)
 	#finally:
