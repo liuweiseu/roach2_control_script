@@ -32,7 +32,7 @@ FPGA_CLOCK = 250e6              # Hz
 SCOPE_IDLE_FLAG = 0x12345678
 POLLING_INTERVAL = 1             # Second
 
-roach_list = ['10.0.1.168','192.168.100.128','localhost']
+roach_list = ['192.168.100.128', '10.0.1.168','localhost']
 
 # Define main window class from template
 path = os.path.dirname(os.path.abspath(__file__))
