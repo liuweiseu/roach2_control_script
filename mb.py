@@ -13,12 +13,10 @@ roach2_default = '192.168.100.128'
 bitstream_default = 'italy_seti1_v1.172.bof'
 port_default = 7147
 
-rf_gain = 0
+beam_id = 0
 
-beam_ids = (7, 16)
 mac_base = (2<<40) + (2<<32)
 spec_scope_names = ('AA', 'BB', 'CR', 'CI')
-
 
 class attrdict(dict):
 	def __init__(self, **kwargs):
@@ -166,7 +164,9 @@ if __name__ == '__main__':
 			print('Configuring spectrometer "%s" accumulation length, acc_len=%d ... ' % (unit, opts.acclen)),
 			fpga.write_int(unit + '_acc_len',opts.acclen)
 			print('done')
-
+		
+		# write beam id
+		fpga.write_int('u0_beam_id', beam_id)
 
 		fpga.write_int('use_tvg', 0b00)
 
