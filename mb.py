@@ -144,8 +144,8 @@ if __name__ == '__main__':
 		print('-' * 20)
 
 		if not args.skip:
-			print('Programming FPGA with  %s ... ' % args.bitstream),
-			fpga.progdev(args.bitstream)
+			print('Programming FPGA with  %s ... ' % args.bof),
+			fpga.progdev(args.bof)
 			print('done')
 
 		for unit in ('u0','u0'):
