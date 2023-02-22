@@ -119,8 +119,8 @@ if __name__ == '__main__':
 	# so it doesn't matter what the src/dst ip addresses are set for them
 	init_10gbe('xgbe0', '192.168.16.221', 33333, '239.2.0.1', 12345)
 	init_10gbe('xgbe1', '192.168.16.222', 33333, '239.2.0.2', 12345)
-	init_10gbe('xgbe2', '192.168.16.223', src_port, multicast_ip_pol1, dst_port)
-	init_10gbe('xgbe3', '192.168.16.224', src_port, multicast_ip_pol0, dst_port)
+	init_10gbe('xgbe2', '192.168.16.223', src_port, multicast_ip_pol0, dst_port)
+	init_10gbe('xgbe3', '192.168.16.224', src_port, multicast_ip_pol1, dst_port)
 
 	print('Issue reset signal...')
 	fpga.write_int('reset', 0b00)
